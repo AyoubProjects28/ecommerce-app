@@ -1,13 +1,14 @@
-CREATE TABLE country (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,      -- Identifiant unique pour chaque pays
-    country_name VARCHAR(255) NOT NULL      -- Nom du pays
-);
-
 CREATE TABLE site_user (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,       -- Identifiant unique pour chaque utilisateur
     email_address VARCHAR(255) NOT NULL,    -- Adresse email de l'utilisateur
     phone_number VARCHAR(50) NOT NULL,                -- Numéro de téléphone de l'utilisateur
     password VARCHAR(255) NOT NULL           -- Mot de passe de l'utilisateur
+);
+
+CREATE TABLE user_address (
+    user_id INT NOT NULL,                         -- Clé étrangère pour l'utilisateur
+    address_id INT NOT NULL,                           -- Clé étrangère pour l'adresse
+    is_default BOOLEAN DEFAULT FALSE          -- Indicateur si l'adresse est l'adresse par défaut
 );
 
 CREATE TABLE address (
@@ -22,15 +23,9 @@ CREATE TABLE address (
     country_id INT NOT NULL                          -- Clé étrangère pour le pays
 );
 
-CREATE TABLE user_address (
-    user_id INT NOT NULL,                         -- Clé étrangère pour l'utilisateur
-    address_id INT NOT NULL,                           -- Clé étrangère pour l'adresse
-    is_default BOOLEAN DEFAULT FALSE          -- Indicateur si l'adresse est l'adresse par défaut
-);
-
-CREATE TABLE payment_type (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,        -- Identifiant unique pour chaque type de paiement
-    value VARCHAR(100) NOT NULL               -- Valeur du type de paiement (ex: carte de crédit, PayPal, etc.)
+CREATE TABLE country (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,      -- Identifiant unique pour chaque pays
+    country_name VARCHAR(255) NOT NULL      -- Nom du pays
 );
 
 CREATE TABLE user_payment_method (
@@ -41,6 +36,11 @@ CREATE TABLE user_payment_method (
     provider VARCHAR(100) NOT NULL,                    -- Fournisseur du paiement (ex: Visa, Mastercard)
     expiry_date DATE NOT NULL,                         -- Date d'expiration
     is_default BOOLEAN DEFAULT FALSE         -- Indicateur si c'est la méthode de paiement par défaut
+);
+
+CREATE TABLE payment_type (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,        -- Identifiant unique pour chaque type de paiement
+    value VARCHAR(100) NOT NULL               -- Valeur du type de paiement (ex: carte de crédit, PayPal, etc.)
 );
 
 CREATE TABLE shopping_cart (
@@ -88,11 +88,6 @@ CREATE TABLE shop_order (
     order_status INT NOT NULL                         -- Clé étrangère pour le statut de la commande
 );
 
-CREATE TABLE order_status (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,        -- Identifiant unique pour chaque statut de commande
-    status VARCHAR(100) NOT NULL              -- Nom du statut (ex: en attente, expédié, livré)
-);
-
 CREATE TABLE order_line (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,        -- Identifiant unique pour chaque ligne de commande
     product_item_id INT NOT NULL,                      -- Clé étrangère pour l'article de produit
@@ -105,6 +100,11 @@ CREATE TABLE shipping_method (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,        -- Identifiant unique pour chaque méthode d'expédition
     name VARCHAR(100) NOT NULL,               -- Nom de la méthode d'expédition
     price DECIMAL(10, 2) NOT NULL             -- Prix de la méthode d'expédition
+);
+
+CREATE TABLE order_status (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,        -- Identifiant unique pour chaque statut de commande
+    status VARCHAR(100) NOT NULL              -- Nom du statut (ex: en attente, expédié, livré)
 );
 
 CREATE TABLE variation (
