@@ -84,6 +84,7 @@ CREATE TABLE shop_order (
     order_date DATETIME DEFAULT CURRENT_TIMESTAMP,  -- Date de la commande
     payment_method_id INT NOT NULL,                    -- Clé étrangère pour le type de paiement
     shipping_address INT NOT NULL,                     -- Clé étrangère pour l'adresse d'expédition
+    shipping_method INT NOT NULL,                     -- Clé étrangère pour le moyen d'expédition
     order_total DECIMAL(10, 2) NOT NULL,     -- Montant total de la commande
     order_status INT NOT NULL                         -- Clé étrangère pour le statut de la commande
 );

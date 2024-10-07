@@ -46,7 +46,7 @@ REFERENCES product_item(id);
 -- to establish a hierarchical relationship within the table
 ALTER TABLE product_category
 ADD CONSTRAINT fk_pc_pc
-FOREIGN KEY (product_category_id)
+FOREIGN KEY (parent_category_id)
 REFERENCES product_category(id);
 
 -- Add foreign key constraint to the product table
