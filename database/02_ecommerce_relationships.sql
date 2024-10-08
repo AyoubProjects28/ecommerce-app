@@ -116,3 +116,13 @@ REFERENCES product_item(id),
 ADD CONSTRAINT fk_pc_variation_option
 FOREIGN KEY (variation_option_id)
 REFERENCES variation_option(id);
+
+-- Add foreign key constraints to the promotion_category table
+-- to establish relationships with the promotion and product_category tables
+ALTER TABLE promotion_category
+ADD CONSTRAINT fk_promo_category_promotion
+FOREIGN KEY (promotion_id)
+REFERENCES promotion(id),
+ADD CONSTRAINT fk_promo_category_product_category
+FOREIGN KEY (category_id)
+REFERENCES product_category(id);
