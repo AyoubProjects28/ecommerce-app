@@ -124,11 +124,3 @@ CREATE TABLE product_configuration (
     product_item_id INT NOT NULL,   -- Référence au produit spécifique (de la table product_item)
     variation_option_id INT NOT NULL  -- Référence à une option de variation (de la table variation_option)
 );
-
-
-
-
-
-
-
-

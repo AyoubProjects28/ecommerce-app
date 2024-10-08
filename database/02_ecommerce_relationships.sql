@@ -126,3 +126,13 @@ REFERENCES promotion(id),
 ADD CONSTRAINT fk_promo_category_product_category
 FOREIGN KEY (category_id)
 REFERENCES product_category(id);
+
+-- Add foreign key constraints to the user_review table
+-- to establish relationships with the site_user and order_line tables
+ALTER TABLE user_review
+ADD CONSTRAINT fk_user_review_site_user
+FOREIGN KEY (user_id)
+REFERENCES site_user(id),
+ADD CONSTRAINT fk_user_review_order_line
+FOREIGN KEY (ordered_product_id)
+REFERENCES order_line(id);
