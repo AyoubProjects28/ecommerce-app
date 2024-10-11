@@ -15,12 +15,18 @@ VALUES
 (4, 'D', '1010', 'Circle Rd', 'Building 5', 'Suburbia', 'East', '98765', 2);
 
 -- Insert into site_user
-INSERT INTO site_user (id, email_address, phone_number, password)
+INSERT INTO site_user (id, email_address, phone_number, password, role)
 VALUES 
-(1, 'john.doe@example.com', '1234567890', 'hashed_password1'),
-(2, 'jane.smith@example.com', '0987654321', 'hashed_password2'),
-(3, 'will.johnson@example.com', '1122334455', 'hashed_password3'),
-(4, 'linda.brown@example.com', '6677889900', 'hashed_password4');
+(1, 'john.doe@example.com', '1234567890', 'hashed_password1', 'CUSTOMER'),
+(2, 'jane.smith@example.com', '0987654321', 'hashed_password2', 'CUSTOMER'),
+(3, 'will.johnson@example.com', '1122334455', 'hashed_password3', 'ADMIN'),
+(4, 'linda.brown@example.com', '6677889900', 'hashed_password4', 'CUSTOMER');
+
+-- Insert into site_seller
+INSERT INTO site_seller (id, user_id, business_name)
+VALUES 
+(1, 2, 'Jane''s Store'),  -- Jane Smith est une vendeuse
+(2, 3, 'Will''s Electronics');  -- Will Johnson est un vendeur (et un admin)
 
 -- Insert into user_address
 INSERT INTO user_address (user_id, address_id, is_default)
@@ -68,26 +74,44 @@ VALUES
 (9, 5, 'Accessories');
 
 -- Insert into product
-INSERT INTO product (id, category_id, name, description, product_image)
+INSERT INTO product (id, category_id, name, description)
 VALUES 
-(1, 1, 'Laptop Pro', 'High-performance laptop', 'laptop_pro.jpg'),
-(2, 2, 'Smartphone X', 'Latest smartphone with best features', 'smartphone_x.jpg'),
-(3, 3, 'Laptop Air', 'Lightweight laptop', 'laptop_air.jpg'),
-(4, 4, 'Smartphone Y', NULL, 'smartphone_y.jpg'),  -- description NULL
-(5, 6, 'Men''s Jacket', 'Stylish and warm jacket for men', 'mens_jacket.jpg'),
-(6, 7, 'Women''s Dress', 'Elegant evening dress', 'womens_dress.jpg'),
-(7, 9, 'Leather Belt', 'High-quality leather belt', 'belt.jpg');
+(1, 1, 'Laptop Pro', 'High-performance laptop'),
+(2, 2, 'Smartphone X', 'Latest smartphone with best features'),
+(3, 3, 'Laptop Air', 'Lightweight laptop'),
+(4, 4, 'Smartphone Y', NULL),  -- description NULL
+(5, 6, 'Men''s Jacket', 'Stylish and warm jacket for men'),
+(6, 7, 'Women''s Dress', 'Elegant evening dress'),
+(7, 9, 'Leather Belt', 'High-quality leather belt');
 
 -- Insert into product_item
-INSERT INTO product_item (id, product_id, SKU, qty_in_stock, product_image, price)
+INSERT INTO product_item (id, product_id, SKU, qty_in_stock, price)
 VALUES 
-(1, 1, 'SKU001', 100, 'laptop_pro.jpg', 999.99),
-(2, 2, 'SKU002', 50, 'smartphone_x.jpg', 799.99),
-(3, 3, NULL, 200, 'laptop_air.jpg', 699.99),  -- SKU NULL
-(4, 4, 'SKU004', 150, 'smartphone_y.jpg', 399.99),
-(5, 5, 'SKU005', 300, 'mens_jacket.jpg', 99.99),
-(6, 6, 'SKU006', 200, 'womens_dress.jpg', 149.99),
-(7, 7, 'SKU007', 500, 'belt.jpg', 19.99);
+(1, 1, 'SKU001', 100, 999.99),
+(2, 2, 'SKU002', 50, 799.99),
+(3, 3, NULL, 200, 699.99),  -- SKU NULL
+(4, 4, 'SKU004', 150, 399.99),
+(5, 5, 'SKU005', 300, 99.99),
+(6, 6, 'SKU006', 200, 149.99),
+(7, 7, 'SKU007', 500, 19.99);
+
+-- Insert into product_image
+INSERT INTO product_image (id, product_id, product_item_id, image_url, is_primary)
+VALUES 
+(1, 1, 1, 'https://example.com/images/laptop_pro_main.jpg', TRUE),  -- Image principale pour Laptop Pro item
+(2, 1, 1, 'https://example.com/images/laptop_pro_side.jpg', FALSE),  -- Image secondaire pour Laptop Pro item
+(3, 2, 2, 'https://example.com/images/smartphone_x_main.jpg', TRUE),  -- Image principale pour Smartphone X item
+(4, 2, 2, 'https://example.com/images/smartphone_x_back.jpg', FALSE),  -- Image secondaire pour Smartphone X item
+(5, 3, 3, 'https://example.com/images/laptop_air_main.jpg', TRUE),  -- Image principale pour Laptop Air item
+(6, 3, 3, 'https://example.com/images/laptop_air_back.jpg', FALSE),  -- Image secondaire pour Laptop Air item
+(7, 4, 4, 'https://example.com/images/smartphone_y_main.jpg', TRUE),  -- Image principale pour Smartphone Y item
+(8, 4, 4, 'https://example.com/images/smartphone_y_side.jpg', FALSE),  -- Image secondaire pour Smartphone Y item
+(9, 5, 5, 'https://example.com/images/mens_jacket_main.jpg', TRUE),  -- Image principale pour Men's Jacket item
+(10, 5, 5, 'https://example.com/images/mens_jacket_back.jpg', FALSE),  -- Image secondaire pour Men's Jacket item
+(11, 6, 6, 'https://example.com/images/womens_dress_main.jpg', TRUE),  -- Image principale pour Women's Dress item
+(12, 6, 6, 'https://example.com/images/womens_dress_back.jpg', FALSE),  -- Image secondaire pour Women's Dress item
+(13, 7, 7, 'https://example.com/images/belt_main.jpg', TRUE),  -- Image principale pour Leather Belt item
+(14, 7, 7, 'https://example.com/images/belt_side.jpg', FALSE);  -- Image secondaire pour Leather Belt item
 
 -- Insert into variation
 INSERT INTO variation (id, category_id, name)

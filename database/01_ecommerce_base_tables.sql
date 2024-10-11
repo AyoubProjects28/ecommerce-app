@@ -2,7 +2,14 @@ CREATE TABLE site_user (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,       -- Identifiant unique pour chaque utilisateur
     email_address VARCHAR(255) NOT NULL,    -- Adresse email de l'utilisateur
     phone_number VARCHAR(50) NOT NULL,                -- Numéro de téléphone de l'utilisateur
-    password VARCHAR(255) NOT NULL           -- Mot de passe de l'utilisateur
+    password VARCHAR(255) NOT NULL,           -- Mot de passe de l'utilisateur
+    role ENUM('CUSTOMER', 'ADMIN') DEFAULT 'CUSTOMER'  -- Rôle de l'utilisateur
+);
+
+CREATE TABLE site_seller (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,  -- Référence à l'utilisateur dans site_user
+    business_name VARCHAR(255) NOT NULL   -- Nom de l'entreprise ou du vendeur
 );
 
 CREATE TABLE user_address (
@@ -65,8 +72,7 @@ CREATE TABLE product (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,        -- Identifiant unique pour chaque produit
     category_id INT NOT NULL,                          -- Clé étrangère pour la catégorie de produit
     name VARCHAR(255) NOT NULL,               -- Nom du produit
-    description TEXT,                         -- Description du produit
-    product_image VARCHAR(255) NOT NULL               -- Lien vers l'image du produit
+    description TEXT                          -- Description du produit
 );
 
 CREATE TABLE product_item (
@@ -74,8 +80,15 @@ CREATE TABLE product_item (
     product_id INT NOT NULL,                           -- Clé étrangère pour le produit
     SKU VARCHAR(100),                         -- Unité de gestion des stocks
     qty_in_stock INT NOT NULL,                         -- Quantité en stock
-    product_image VARCHAR(255) NOT NULL,               -- Lien vers l'image de l'article
     price DECIMAL(10, 2) NOT NULL           -- Prix de l'article
+);
+
+CREATE TABLE product_image (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    product_id INT,  -- Référence au produit
+    product_item_id INT,  -- Référence à un article produit (optionnel)
+    image_url VARCHAR(255) NOT NULL,  -- URL de l'image
+    is_primary BOOLEAN DEFAULT false  -- Indicateur si c'est l'image principale
 );
 
 CREATE TABLE shop_order (
