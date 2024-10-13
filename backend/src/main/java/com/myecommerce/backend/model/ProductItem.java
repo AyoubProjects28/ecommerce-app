@@ -11,9 +11,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.math.BigDecimal;
 import java.util.Set;
 
@@ -21,6 +22,8 @@ import java.util.Set;
 @Table(name = "product_item")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductItem {
 
     @Id

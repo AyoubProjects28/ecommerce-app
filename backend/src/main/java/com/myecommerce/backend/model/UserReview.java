@@ -10,13 +10,17 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "user_review")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserReview {
 
     @Id

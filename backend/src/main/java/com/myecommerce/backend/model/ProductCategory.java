@@ -12,13 +12,17 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.Set;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "product_category")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductCategory {
 
     @Id

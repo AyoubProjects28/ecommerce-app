@@ -14,13 +14,17 @@ import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Set;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "shop_order")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ShopOrder {
 
     @Id
